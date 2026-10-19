@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Firmware da braçadeira Pulso
 
 Firmware em C para o **RAK3172** (STM32WLE5 + rádio LoRa). Ele lê os sensores, calcula BPM, SpO2 e a posição, trata o botão SOS e a detecção de queda, e envia um pacote de 20 bytes pela LoRaWAN a cada 5 segundos.
@@ -89,3 +90,10 @@ Para mandar os pacotes do firmware simulado direto para o servidor:
 ## Consumo de energia
 
 O MCU fica em Stop2 entre os eventos. O MAX30102 amostra continuamente com os LEDs em cerca de 7 mA e baixo ciclo de trabalho. O UWB liga só durante o ranging, cerca de 10 ms a cada 5 s. A LoRa transmite cerca de 50 ms a cada 5 s. A estimativa de consumo médio é de 2 a 4 mA, o que dá vários dias com a bateria de 1200 mAh. **Esse valor precisa ser confirmado em bancada.**
+=======
+# Firmware
+
+Código da braçadeira (RAK3172 / STM32WLE5): leitura do MAX30102, ranging UWB com DWM3000, envio LoRaWAN a cada 5 s, botão SOS e modo de baixo consumo.
+
+*A desenvolver.*
+>>>>>>> ac7e550b7831f00c5ccce98272034df7b2f66950

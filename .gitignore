@@ -5,5 +5,8 @@ node_modules/
 __pycache__/
 *.pyc
 .env
+<<<<<<< HEAD
 firmware/build/
 *.db
+=======
+>>>>>>> ac7e550b7831f00c5ccce98272034df7b2f66950

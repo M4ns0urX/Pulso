@@ -1,5 +1,6 @@
 # Digital twin
 
+<<<<<<< HEAD
 Simulação completa do sistema Pulso. Ela reproduz a mina, os trabalhadores, as braçadeiras e a rede LoRa, e é a prova de conceito do projeto.
 
 ## O que é simulado
@@ -37,3 +38,8 @@ python3 run_demo.py --velocidade 4   # 4x mais rápido
 ```
 
 No dashboard, selecione um trabalhador e use os botões **SOS**, **Gás**, **Queda**, **Sem sinal** e **Normalizar** para criar eventos na hora, o que é útil na apresentação para a banca.
+=======
+Simulação completa do sistema (sensores, rede LoRa, algoritmo de localização UWB e dashboard) usada como prova de conceito.
+
+*Adicionar o código da simulação aqui.*
+>>>>>>> ac7e550b7831f00c5ccce98272034df7b2f66950

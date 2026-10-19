@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Dashboard da sala de controle
 
 Interface web em HTML, CSS e JavaScript puros, sem build. É servida pelo próprio servidor da Pulso e recebe o estado a cada 1 s por Server-Sent Events (`/api/stream`).
@@ -25,3 +26,12 @@ Interface web em HTML, CSS e JavaScript puros, sem build. É servida pelo própr
 | `app.js` | Conexão com a API, desenho do mapa, alertas, gráficos |
 
 Para rodar, use `python3 run_demo.py` na raiz e abra http://localhost:8080.
+=======
+# Dashboard
+
+Interface da sala de controle: mapa da mina em tempo real, sinais vitais, painel de alertas e SOS, relatórios NR-22.
+
+![Dashboard](../figuras/sistema/Figura_dashboard.png)
+
+*A desenvolver.*
+>>>>>>> ac7e550b7831f00c5ccce98272034df7b2f66950
