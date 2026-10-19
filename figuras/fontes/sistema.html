@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Inter,sans-serif;background:#fff;color:#1d2430}
+.fig{background:#fff;padding:30px 36px;display:inline-block}
+h2{font-size:22px;font-weight:700;color:#1F3A5F;margin-bottom:14px}
+svg text{font-family:Inter}
+.lb{font-size:15px;font-weight:700;fill:#1F3A5F}
+.ls{font-size:13px;fill:#5b6675}
+.lv{font-size:14px;font-weight:700;fill:#8A5A2B;letter-spacing:.5px}
+.nb{font-size:15px;font-weight:800;fill:#fff}
+.cl{font-size:15px;font-weight:700;fill:#1d2430}
+.cs{font-size:13.5px;fill:#5b6675}
+</style></head><body>
+
+<!-- ================= A: INFOGRÁFICO ================= -->
+<div class="fig" id="A">
+<h2>Como a Pulso funciona dentro da mina</h2>
+<svg width="1700" height="860" viewBox="0 0 1700 860">
+<defs>
+ <g id="wk"><!-- worker, origin at feet center -->
+  <line x1="-6" y1="-2" x2="-5" y2="-24" stroke="#33404f" stroke-width="5" stroke-linecap="round"/>
+  <line x1="6" y1="-2" x2="5" y2="-24" stroke="#33404f" stroke-width="5" stroke-linecap="round"/>
+  <rect x="-11" y="-56" width="22" height="34" rx="7" fill="#E07B24"/>
+  <rect x="-11" y="-44" width="22" height="4" fill="#F4D35E"/>
+  <line x1="11" y1="-52" x2="17" y2="-30" stroke="#E07B24" stroke-width="6" stroke-linecap="round"/>
+  <rect x="12" y="-44" width="10" height="7" rx="2" fill="#0E7C7B" transform="rotate(15 17 -40)"/>
+  <circle cx="0" cy="-66" r="9" fill="#E8C4A0"/>
+  <path d="M-11 -67 A11 11 0 0 1 11 -67 L13 -66 L-13 -66 Z" fill="#F4D35E"/>
+ </g>
+ <g id="anc"><path d="M0 0 L9 9 L0 18 L-9 9 Z" fill="#1F3A5F"/></g>
+ <g id="gw"><rect x="-12" y="0" width="24" height="14" rx="3" fill="#0E7C7B"/><line x1="0" y1="14" x2="0" y2="30" stroke="#0E7C7B" stroke-width="3"/><path d="M-10 36 A14 14 0 0 0 10 36" fill="none" stroke="#0E7C7B" stroke-width="2.5"/><path d="M-16 42 A22 22 0 0 0 16 42" fill="none" stroke="#0E7C7B" stroke-width="2.5" opacity=".6"/></g>
+ <marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#0E7C7B"/></marker>
+</defs>
+<!-- sky & ground -->
+<rect x="0" y="0" width="1700" height="210" fill="#EEF4FA"/>
+<rect x="0" y="210" width="1700" height="560" fill="#E6D6BF"/>
+<rect x="0" y="210" width="1700" height="14" fill="#8C6A45"/>
+<path d="M0 300 C300 290 600 315 900 300 S1500 290 1700 305" stroke="#D6C2A5" stroke-width="3" fill="none"/>
+<path d="M0 560 C300 550 700 575 1000 560 S1500 548 1700 565" stroke="#D6C2A5" stroke-width="3" fill="none"/>
+<text x="20" y="245" class="ls" style="fill:#7a5a3a;font-weight:600">SUPERFÍCIE</text>
+
+<!-- headframe -->
+<path d="M190 210 L225 70 L260 210" fill="none" stroke="#5b6675" stroke-width="5"/>
+<line x1="200" y1="160" x2="250" y2="160" stroke="#5b6675" stroke-width="4"/>
+<line x1="208" y1="120" x2="242" y2="120" stroke="#5b6675" stroke-width="4"/>
+<circle cx="225" cy="70" r="12" fill="none" stroke="#5b6675" stroke-width="4"/>
+<!-- shaft -->
+<rect x="200" y="224" width="50" height="520" fill="#CDB693"/>
+<!-- cable -->
+<path d="M240 700 V420 M240 420 V200 H1180" fill="none" stroke="#0E7C7B" stroke-width="4" stroke-dasharray="10 6"/>
+<path d="M600 700 H240" stroke="#0E7C7B" stroke-width="4" stroke-dasharray="10 6"/>
+<path d="M600 420 H240" stroke="#0E7C7B" stroke-width="4" stroke-dasharray="10 6"/>
+
+<!-- control room -->
+<rect x="1180" y="95" width="320" height="115" fill="#fff" stroke="#1F3A5F" stroke-width="3"/>
+<path d="M1170 95 L1340 45 L1510 95 Z" fill="#1F3A5F"/>
+<rect x="1205" y="115" width="150" height="80" rx="4" fill="#1F3A5F"/>
+<rect x="1212" y="122" width="136" height="66" rx="2" fill="#EAF1F8"/>
+<line x1="1220" y1="140" x2="1340" y2="140" stroke="#9fb3c8" stroke-width="6"/>
+<line x1="1220" y1="168" x2="1340" y2="168" stroke="#9fb3c8" stroke-width="6"/>
+<circle cx="1250" cy="140" r="5" fill="#0E7C7B"/><circle cx="1300" cy="168" r="5" fill="#B83227"/><circle cx="1320" cy="140" r="5" fill="#0E7C7B"/>
+<rect x="1380" y="115" width="38" height="80" rx="4" fill="#33404f"/>
+<line x1="1386" y1="130" x2="1412" y2="130" stroke="#0E7C7B" stroke-width="3"/><line x1="1386" y1="145" x2="1412" y2="145" stroke="#0E7C7B" stroke-width="3"/><line x1="1386" y1="160" x2="1412" y2="160" stroke="#0E7C7B" stroke-width="3"/>
+<text x="1435" y="140" class="ls">servidor</text><text x="1435" y="157" class="ls">+ banco</text>
+<text x="1340" y="30" class="lb" text-anchor="middle">Sala de controle</text>
+
+<!-- level 1 tunnel -->
+<rect x="250" y="380" width="1380" height="100" rx="40" fill="#F8F2E9" stroke="#8C6A45" stroke-width="2.5"/>
+<text x="1610" y="372" class="lv" text-anchor="end">NÍVEL −150 m</text>
+<!-- level 2 tunnel -->
+<rect x="250" y="660" width="1380" height="100" rx="40" fill="#F8F2E9" stroke="#8C6A45" stroke-width="2.5"/>
+<text x="1610" y="652" class="lv" text-anchor="end">NÍVEL −300 m</text>
+
+<!-- anchors -->
+<use href="#anc" x="430" y="383"/><use href="#anc" x="820" y="383"/><use href="#anc" x="1180" y="383"/><use href="#anc" x="1520" y="383"/>
+<use href="#anc" x="430" y="663"/><use href="#anc" x="820" y="663"/><use href="#anc" x="1180" y="663"/><use href="#anc" x="1520" y="663"/>
+<!-- gateways -->
+<use href="#gw" x="600" y="383"/><use href="#gw" x="600" y="663"/>
+<use href="#gw" x="1350" y="383"/><use href="#gw" x="1350" y="663"/>
+<path d="M1350 397 V360 H600 V383" fill="none" stroke="#0E7C7B" stroke-width="3" stroke-dasharray="6 5" opacity=".7"/>
+<path d="M1350 677 V640 H600 V663" fill="none" stroke="#0E7C7B" stroke-width="3" stroke-dasharray="6 5" opacity=".7"/>
+
+<!-- UWB ranging for worker at 1000 L1 -->
+<line x1="1015" y1="436" x2="820" y2="392" stroke="#1F3A5F" stroke-width="2" stroke-dasharray="4 4"/>
+<line x1="1015" y1="436" x2="1180" y2="392" stroke="#1F3A5F" stroke-width="2" stroke-dasharray="4 4"/>
+<!-- LoRa from worker 480 to gateway 600 -->
+<path d="M497 432 Q545 405 590 425" fill="none" stroke="#0E7C7B" stroke-width="2.5" marker-end="url(#ar)"/>
+
+<!-- workers L1 -->
+<use href="#wk" x="480" y="476"/><use href="#wk" x="1000" y="476"/><use href="#wk" x="1460" y="476"/>
+<!-- workers L2 -->
+<use href="#wk" x="1080" y="756"/><use href="#wk" x="1460" y="756"/>
+<!-- SOS worker -->
+<circle cx="730" cy="715" r="34" fill="none" stroke="#B83227" stroke-width="2.5" opacity=".8"/>
+<circle cx="730" cy="715" r="52" fill="none" stroke="#B83227" stroke-width="2" opacity=".45"/>
+<use href="#wk" x="730" y="756"/>
+<rect x="752" y="676" width="46" height="22" rx="11" fill="#B83227"/><text x="775" y="692" text-anchor="middle" style="font-size:12px;font-weight:800;fill:#fff">SOS</text>
+
+<!-- numbered callouts -->
+<g>
+ <circle cx="1048" cy="440" r="15" fill="#E07B24"/><text x="1048" y="445" class="nb" text-anchor="middle">1</text>
+ <circle cx="820" cy="340" r="15" fill="#1F3A5F"/><text x="820" y="345" class="nb" text-anchor="middle">2</text>
+ <circle cx="640" cy="330" r="15" fill="#0E7C7B"/><text x="640" y="335" class="nb" text-anchor="middle">3</text>
+ <circle cx="282" cy="560" r="15" fill="#0E7C7B"/><text x="282" y="565" class="nb" text-anchor="middle">4</text>
+ <circle cx="1530" cy="70" r="15" fill="#1F3A5F"/><text x="1530" y="75" class="nb" text-anchor="middle">5</text>
+</g>
+<text x="890" y="404" class="ls" style="fill:#1F3A5F;font-weight:600">UWB</text>
+<text x="515" y="405" class="ls" style="fill:#0E7C7B;font-weight:600">LoRa</text>
+
+<!-- legend -->
+<g transform="translate(0,800)">
+ <circle cx="15" cy="20" r="13" fill="#E07B24"/><text x="15" y="25" class="nb" text-anchor="middle">1</text>
+ <text x="38" y="17" class="cl">Braçadeira</text><text x="38" y="37" class="cs">mede BPM e SpO2</text>
+ <circle cx="300" cy="20" r="13" fill="#1F3A5F"/><text x="300" y="25" class="nb" text-anchor="middle">2</text>
+ <text x="323" y="17" class="cl">Âncoras UWB</text><text x="323" y="37" class="cs">calculam a posição (±10 cm)</text>
+ <circle cx="610" cy="20" r="13" fill="#0E7C7B"/><text x="610" y="25" class="nb" text-anchor="middle">3</text>
+ <text x="633" y="17" class="cl">Gateways LoRa</text><text x="633" y="37" class="cs">recebem os dados a cada 5 s</text>
+ <circle cx="920" cy="20" r="13" fill="#0E7C7B"/><text x="920" y="25" class="nb" text-anchor="middle">4</text>
+ <text x="943" y="17" class="cl">Cabo / fibra</text><text x="943" y="37" class="cs">leva os dados à superfície</text>
+ <circle cx="1210" cy="20" r="13" fill="#1F3A5F"/><text x="1210" y="25" class="nb" text-anchor="middle">5</text>
+ <text x="1233" y="17" class="cl">Sala de controle</text><text x="1233" y="37" class="cs">mapa ao vivo, alertas e SOS</text>
+ <rect x="1480" y="6" width="46" height="22" rx="11" fill="#B83227"/><text x="1503" y="22" text-anchor="middle" style="font-size:12px;font-weight:800;fill:#fff">SOS</text>
+ <text x="1536" y="22" class="cs">pedido de ajuda</text>
+</g>
+</svg>
+</div>
+
+<!-- ================= B: BRAÇADEIRA ================= -->
+<div class="fig" id="B">
+<h2>A braçadeira Pulso: componentes</h2>
+<svg width="1500" height="650" viewBox="0 90 1500 650">
+<defs><marker id="d" markerWidth="8" markerHeight="8" refX="4" refY="4"><circle cx="4" cy="4" r="3.5" fill="#1F3A5F"/></marker></defs>
+<!-- strap -->
+<rect x="300" y="250" width="900" height="150" rx="40" fill="#2B3440"/>
+<g stroke="#3a4655" stroke-width="3">
+ <line x1="350" y1="270" x2="350" y2="380"/><line x1="390" y1="270" x2="390" y2="380"/><line x1="430" y1="270" x2="430" y2="380"/>
+ <line x1="1070" y1="270" x2="1070" y2="380"/><line x1="1110" y1="270" x2="1110" y2="380"/><line x1="1150" y1="270" x2="1150" y2="380"/>
+</g>
+<rect x="1170" y="290" width="40" height="70" rx="8" fill="#5b6675"/>
+<!-- module -->
+<rect x="540" y="185" width="420" height="280" rx="36" fill="#E9EDF2" stroke="#1F3A5F" stroke-width="4"/>
+<rect x="556" y="201" width="388" height="248" rx="26" fill="none" stroke="#C3CCD7" stroke-width="2"/>
+<!-- x-ray internals -->
+<rect x="760" y="250" width="160" height="56" rx="8" fill="#fff" stroke="#1F3A5F" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="840" y="284" text-anchor="middle" style="font-size:15px;font-weight:700;fill:#1F3A5F">UWB</text>
+<rect x="760" y="318" width="160" height="56" rx="8" fill="#fff" stroke="#0E7C7B" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="840" y="352" text-anchor="middle" style="font-size:15px;font-weight:700;fill:#0E7C7B">LoRa</text>
+<rect x="585" y="390" width="335" height="40" rx="8" fill="#fff" stroke="#B7791F" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="752" y="416" text-anchor="middle" style="font-size:14px;font-weight:700;fill:#B7791F">BATERIA</text>
+<!-- SOS button -->
+<circle cx="650" cy="305" r="62" fill="#C9D1DB"/>
+<circle cx="650" cy="305" r="48" fill="#B83227"/>
+<circle cx="650" cy="305" r="48" fill="none" stroke="#8E2219" stroke-width="4"/>
+<text x="650" y="314" text-anchor="middle" style="font-size:24px;font-weight:800;fill:#fff">SOS</text>
+<!-- LEDs -->
+<circle cx="880" cy="222" r="9" fill="#B83227"/><circle cx="908" cy="222" r="9" fill="#2EA36B"/>
+<text x="600" y="232" style="font-size:16px;font-weight:800;fill:#1F3A5F;letter-spacing:2px">PULSO</text>
+
+<!-- callouts left -->
+<g fill="none" stroke="#1F3A5F" stroke-width="2">
+ <path d="M592 280 L470 140 H300" marker-start="url(#d)"/>
+ <path d="M545 440 L470 620 H300" marker-start="url(#d)"/>
+ <path d="M380 395 L340 520 H300" marker-start="url(#d)"/>
+ <path d="M880 212 L1000 120 H1200" marker-start="url(#d)"/>
+ <path d="M920 278 L1030 230 H1200" marker-start="url(#d)"/>
+ <path d="M920 346 L1050 430 H1200" marker-start="url(#d)"/>
+ <path d="M920 410 L1030 540 H1200" marker-start="url(#d)"/>
+</g>
+<g>
+ <text x="40" y="132" class="cl">Botão SOS protegido</text><text x="40" y="153" class="cs">embutido; segurar 2 s para acionar</text>
+ <text x="40" y="612" class="cl">Carcaça IP68</text><text x="40" y="633" class="cs">vedada contra poeira e água</text>
+ <text x="40" y="512" class="cl">Pulseira ajustável</text><text x="40" y="533" class="cs">usada no braço, por cima do uniforme</text>
+ <text x="1210" y="112" class="cl">LED vermelho / verde</text><text x="1210" y="133" class="cs">+ motor de vibração</text>
+ <text x="1210" y="222" class="cl">Módulo UWB</text><text x="1210" y="243" class="cs">localização com ±10 cm</text>
+ <text x="1210" y="422" class="cl">Rádio LoRa</text><text x="1210" y="443" class="cs">envia os dados a cada 5 s</text>
+ <text x="1210" y="532" class="cl">Bateria recarregável</text><text x="1210" y="553" class="cs">reserva mínima para SOS</text>
+</g>
+
+<!-- side view: PPG -->
+<g transform="translate(560,560)">
+ <text x="190" y="0" text-anchor="middle" class="cl">Vista lateral: sensor óptico (PPG)</text>
+ <rect x="0" y="80" width="380" height="60" rx="10" fill="#F2D3C0"/>
+ <text x="190" y="118" text-anchor="middle" style="font-size:13px;fill:#9a5b3a;font-weight:600">pele / braço</text>
+ <rect x="60" y="22" width="260" height="40" rx="10" fill="#E9EDF2" stroke="#1F3A5F" stroke-width="3"/>
+ <rect x="160" y="62" width="60" height="14" rx="4" fill="#1F3A5F"/>
+ <path d="M175 76 L160 105" stroke="#B83227" stroke-width="3"/><path d="M190 76 L190 108" stroke="#7a2b8a" stroke-width="3"/><path d="M205 76 L220 105" stroke="#B83227" stroke-width="3"/>
+ <text x="335" y="60" class="cs">luz vermelha e infravermelha</text>
+ <text x="335" y="78" class="cs">→ calcula BPM e SpO2</text>
+</g>
+<text x="40" y="720" class="cs" style="font-style:italic">Ilustração conceitual. Componentes internos mostrados em tracejado.</text>
+</svg>
+</div>
+
+<!-- ================= C: DASHBOARD ================= -->
+<div class="fig" id="C">
+<h2>Dashboard da sala de controle (ilustração)</h2>
+<svg width="1640" height="900" viewBox="0 0 1640 900">
+<rect x="0" y="0" width="1640" height="900" rx="14" fill="#F3F5F8" stroke="#CBD3DD" stroke-width="2"/>
+<!-- header -->
+<path d="M0 14 A14 14 0 0 1 14 0 H1626 A14 14 0 0 1 1640 14 V64 H0 Z" fill="#1F3A5F"/>
+<text x="28" y="41" style="font-size:20px;font-weight:800;fill:#fff;letter-spacing:2px">PULSO</text>
+<text x="128" y="41" style="font-size:16px;fill:#C9D6E6">Sala de controle</text>
+<text x="1610" y="41" text-anchor="end" style="font-size:15px;fill:#C9D6E6">Mina exemplo · Turno A · 14:32:05</text>
+<!-- alert banner -->
+<rect x="20" y="80" width="1600" height="62" rx="10" fill="#B83227"/>
+<path d="M50 96 L66 124 H34 Z" fill="#fff"/><rect x="49" y="104" width="2.5" height="10" fill="#B83227"/><rect x="49" y="117" width="2.5" height="3" fill="#B83227"/>
+<text x="84" y="118" style="font-size:18px;font-weight:800;fill:#fff">SOS</text>
+<text x="134" y="118" style="font-size:17px;fill:#fff">Carlos M. · braçadeira #0142 · Nível −300 m, Galeria S-2 · há 4 s</text>
+<rect x="1440" y="92" width="164" height="38" rx="8" fill="#fff"/><text x="1522" y="117" text-anchor="middle" style="font-size:15px;font-weight:800;fill:#B83227">RECEBIDO</text>
+<!-- map panel -->
+<rect x="20" y="160" width="1020" height="720" rx="12" fill="#fff" stroke="#CBD3DD"/>
+<rect x="40" y="178" width="150" height="34" rx="17" fill="#EAF1F8"/><text x="115" y="200" text-anchor="middle" style="font-size:14px;fill:#1F3A5F;font-weight:600">Nível −150 m</text>
+<rect x="200" y="178" width="150" height="34" rx="17" fill="#1F3A5F"/><text x="275" y="200" text-anchor="middle" style="font-size:14px;fill:#fff;font-weight:700">Nível −300 m</text>
+<text x="1020" y="200" text-anchor="end" style="font-size:13px;fill:#5b6675">Mapa em planta · atualizado a cada 5 s</text>
+<!-- tunnels plan -->
+<g fill="none" stroke="#DCE2EA" stroke-width="46" stroke-linecap="round" stroke-linejoin="round">
+ <path d="M90 520 H960"/>
+ <path d="M260 520 V280 H760 V520"/>
+ <path d="M520 520 V820"/>
+ <path d="M760 280 H960"/>
+ <path d="M520 700 H900"/>
+</g>
+<g style="font-size:12.5px;font-weight:700;fill:#8995A5;letter-spacing:1px">
+ <text x="120" y="490">RAMPA</text><text x="420" y="262">GALERIA S-1</text><text x="830" y="262">S-4</text><text x="560" y="680">GALERIA S-2</text><text x="900" y="500">S-3</text>
+</g>
+<!-- anchors -->
+<g fill="#8995A5">
+ <path d="M260 300 l6 6 -6 6 -6 -6z"/><path d="M500 274 l6 6 -6 6 -6 -6z"/><path d="M760 400 l6 6 -6 6 -6 -6z"/><path d="M400 514 l6 6 -6 6 -6 -6z"/><path d="M700 514 l6 6 -6 6 -6 -6z"/><path d="M520 620 l6 6 -6 6 -6 -6z"/><path d="M700 694 l6 6 -6 6 -6 -6z"/><path d="M520 790 l6 6 -6 6 -6 -6z"/><path d="M850 274 l6 6 -6 6 -6 -6z"/>
+</g>
+<!-- workers -->
+<g style="font-size:12.5px;font-weight:600;fill:#1d2430">
+ <circle cx="340" cy="280" r="9" fill="#2EA36B"/><text x="352" y="270">Lucas T.</text>
+ <circle cx="620" cy="280" r="9" fill="#2EA36B"/><text x="632" y="270">João P.</text>
+ <circle cx="760" cy="460" r="9" fill="#2EA36B"/><text x="774" y="464">Marcos L.</text>
+ <circle cx="910" cy="280" r="9" fill="#2EA36B"/><text x="890" y="312">Pedro A.</text>
+ <circle cx="180" cy="520" r="9" fill="#E0A21B"/><text x="166" y="552">Rita F.</text>
+ <circle cx="600" cy="700" r="9" fill="#2EA36B"/><text x="580" y="732">Ana R.</text>
+ <circle cx="800" cy="700" r="24" fill="none" stroke="#B83227" stroke-width="2.5" opacity=".6"/>
+ <circle cx="800" cy="700" r="38" fill="none" stroke="#B83227" stroke-width="2" opacity=".3"/>
+ <circle cx="800" cy="700" r="11" fill="#B83227"/><text x="830" y="736" style="fill:#B83227;font-weight:800">Carlos M. · SOS</text>
+</g>
+<g transform="translate(40,850)" style="font-size:13px;fill:#5b6675">
+ <circle cx="6" cy="-4" r="6" fill="#2EA36B"/><text x="18" y="0">normal</text>
+ <circle cx="96" cy="-4" r="6" fill="#E0A21B"/><text x="108" y="0">aviso</text>
+ <circle cx="176" cy="-4" r="6" fill="#B83227"/><text x="188" y="0">emergência</text>
+ <path d="M290 -10 l6 6 -6 6 -6 -6z" fill="#8995A5"/><text x="304" y="0">âncora UWB</text>
+</g>
+<!-- KPIs -->
+<g style="font-family:Inter">
+ <rect x="1060" y="160" width="176" height="96" rx="12" fill="#fff" stroke="#CBD3DD"/>
+ <text x="1078" y="190" style="font-size:13px;fill:#5b6675">No subsolo</text><text x="1078" y="236" style="font-size:36px;font-weight:800;fill:#1F3A5F">42</text>
+ <rect x="1252" y="160" width="176" height="96" rx="12" fill="#FDF0EF" stroke="#E7B3AE"/>
+ <text x="1270" y="190" style="font-size:13px;fill:#B83227">Alertas ativos</text><text x="1270" y="236" style="font-size:36px;font-weight:800;fill:#B83227">1</text>
+ <rect x="1444" y="160" width="176" height="96" rx="12" fill="#fff" stroke="#CBD3DD"/>
+ <text x="1462" y="190" style="font-size:13px;fill:#5b6675">Sem sinal</text><text x="1462" y="236" style="font-size:36px;font-weight:800;fill:#1F3A5F">0</text>
+</g>
+<!-- list -->
+<rect x="1060" y="272" width="560" height="608" rx="12" fill="#fff" stroke="#CBD3DD"/>
+<g style="font-size:12px;font-weight:700;fill:#5b6675;letter-spacing:.8px">
+ <text x="1080" y="304">TRABALHADOR</text><text x="1260" y="304">ZONA</text><text x="1340" y="304">BPM</text><text x="1410" y="304">SpO2</text><text x="1490" y="304">BATERIA</text>
+</g>
+<line x1="1076" y1="318" x2="1604" y2="318" stroke="#E6EAF0" stroke-width="2"/>
+<g style="font-size:15px;fill:#1d2430">
+ <rect x="1068" y="324" width="544" height="52" rx="8" fill="#FDF0EF"/>
+ <circle cx="1088" cy="350" r="6" fill="#B83227"/><text x="1102" y="355" style="font-weight:700;fill:#B83227">Carlos M.</text><text x="1260" y="355">S-2</text><text x="1340" y="355" style="font-weight:700;fill:#B83227">128</text><text x="1410" y="355">95%</text><text x="1490" y="355">71%</text>
+ <circle cx="1088" cy="406" r="6" fill="#2EA36B"/><text x="1102" y="411">Ana R.</text><text x="1260" y="411">S-2</text><text x="1340" y="411">92</text><text x="1410" y="411">97%</text><text x="1490" y="411">88%</text>
+ <line x1="1076" y1="434" x2="1604" y2="434" stroke="#EEF1F5"/>
+ <circle cx="1088" cy="462" r="6" fill="#2EA36B"/><text x="1102" y="467">João P.</text><text x="1260" y="467">S-1</text><text x="1340" y="467">84</text><text x="1410" y="467">98%</text><text x="1490" y="467">64%</text>
+ <line x1="1076" y1="490" x2="1604" y2="490" stroke="#EEF1F5"/>
+ <circle cx="1088" cy="518" r="6" fill="#2EA36B"/><text x="1102" y="523">Marcos L.</text><text x="1260" y="523">S-3</text><text x="1340" y="523">101</text><text x="1410" y="523">96%</text><text x="1490" y="523">52%</text>
+ <line x1="1076" y1="546" x2="1604" y2="546" stroke="#EEF1F5"/>
+ <circle cx="1088" cy="574" r="6" fill="#2EA36B"/><text x="1102" y="579">Pedro A.</text><text x="1260" y="579">S-4</text><text x="1340" y="579">76</text><text x="1410" y="579">98%</text><text x="1490" y="579">90%</text>
+ <line x1="1076" y1="602" x2="1604" y2="602" stroke="#EEF1F5"/>
+ <circle cx="1088" cy="630" r="6" fill="#E0A21B"/><text x="1102" y="635">Rita F.</text><text x="1260" y="635">Rampa</text><text x="1340" y="635">88</text><text x="1410" y="635">97%</text><text x="1490" y="635" style="font-weight:700;fill:#B7791F">14%</text>
+ <line x1="1076" y1="658" x2="1604" y2="658" stroke="#EEF1F5"/>
+ <text x="1340" y="700" text-anchor="middle" style="font-size:13px;fill:#8995A5">+ 36 trabalhadores</text>
+</g>
+<!-- mini chart for selected -->
+<text x="1080" y="752" style="font-size:13px;font-weight:700;fill:#5b6675;letter-spacing:.8px">CARLOS M. · BPM ÚLTIMOS 5 MIN</text>
+<polyline fill="none" stroke="#B83227" stroke-width="3" points="1080,850 1120,846 1160,848 1200,843 1240,845 1280,840 1320,842 1360,836 1400,830 1440,818 1480,800 1520,790 1560,782 1600,778"/>
+<line x1="1080" y1="860" x2="1600" y2="860" stroke="#E6EAF0" stroke-width="2"/>
+</svg>
+</div>
+</body></html>

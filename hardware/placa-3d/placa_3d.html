@@ -1,0 +1,207 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Inter,sans-serif;background:#fff;color:#1d2430}
+#fig{width:1960px;padding:30px 36px;background:#fff}
+h2{font-size:22px;font-weight:700;color:#1F3A5F;margin-bottom:4px}
+.sub{font-size:14px;color:#5b6675;margin-bottom:10px}
+.row{display:flex;gap:20px}
+.panel{position:relative;background:#fff}
+.panel .tt{position:absolute;left:16px;top:10px;font-size:14px;font-weight:700;color:#1F3A5F;letter-spacing:1px;text-transform:uppercase;z-index:3}
+canvas{display:block}
+svg.ov{position:absolute;left:0;top:0;pointer-events:none}
+svg text{font-family:Inter}
+</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script>
+</head><body>
+<div id="fig">
+<h2>Placa eletrônica da braçadeira Pulso (renderização 3D)</h2>
+<div class="sub">Placa de 46 × 34 mm, 4 camadas. Vista explodida com a bateria abaixo da placa. Modelo ilustrativo.</div>
+<div class="row">
+ <div class="panel" id="p1" style="width:1260px;height:860px"><div class="tt">Face superior</div></div>
+ <div class="panel" id="p2" style="width:620px;height:860px;background:#F7F9FB;border-radius:12px"><div class="tt">Face inferior (contato com o braço)</div></div>
+</div>
+</div>
+<script type="module">
+import * as THREE from 'three';
+
+const scene = new THREE.Scene();
+const M = (c, o={}) => new THREE.MeshStandardMaterial(Object.assign({color:c, roughness:.55, metalness:0}, o));
+const mats = {
+  pcb: M(0x0d6b3c,{roughness:.45}),
+  edge: M(0xc9b77a),
+  metal: M(0xc7ccd3,{metalness:.85, roughness:.32}),
+  ic: M(0x1b1d20,{roughness:.5}),
+  gold: M(0xd4a640,{metalness:.9, roughness:.3}),
+  cap: M(0xb78b55), res: M(0x202225),
+  white: M(0xf2f2ee), red: M(0xc8312a,{roughness:.4}), copper: M(0xc87533,{metalness:.8,roughness:.35}),
+  blue: M(0x1d3c5a), batt: M(0xd8dde3,{metalness:.55, roughness:.38}), wireR: M(0xd22b2b), wireB: M(0x222222),
+  ledR: M(0xff4a3a,{emissive:0xff2a1a, emissiveIntensity:.9}), ledG: M(0x3ee08a,{emissive:0x18c060, emissiveIntensity:.9}),
+  glass: M(0x2a3540,{metalness:.2, roughness:.08}), foam: M(0x2c2c2c,{roughness:.95})
+};
+const T = 1.6, ZT = T/2, ZB = -T/2;
+function box(w,h,d,mat,x,y,z){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;scene.add(m);return m;}
+function cyl(r,h,mat,x,y,z,seg=40){const m=new THREE.Mesh(new THREE.CylinderGeometry(r,r,h,seg),mat);m.rotation.x=Math.PI/2;m.position.set(x,y,z);m.castShadow=true;scene.add(m);return m;}
+function label(txt,w,h,x,y,z,opts={}){
+  const c=document.createElement('canvas');c.width=w*40;c.height=h*40;const g=c.getContext('2d');
+  g.fillStyle=opts.bg||'rgba(0,0,0,0)';g.fillRect(0,0,c.width,c.height);
+  g.fillStyle=opts.fg||'#fff';g.textAlign='center';g.textBaseline='middle';
+  const lines=txt.split('\n');const fs=opts.fs||c.height/(lines.length+1.2);
+  g.font=`700 ${fs}px Inter`;lines.forEach((l,i)=>g.fillText(l,c.width/2,c.height/2+(i-(lines.length-1)/2)*fs*1.15));
+  const tex=new THREE.CanvasTexture(c);tex.anisotropy=8;
+  const m=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshStandardMaterial({map:tex,transparent:true,roughness:.6}));
+  m.position.set(x,y,z);if(opts.flip)m.rotation.y=Math.PI;scene.add(m);return m;
+}
+// ---------- PCB ----------
+const W=46,H=34,R=3;
+const sh=new THREE.Shape();
+sh.moveTo(-W/2+R,-H/2);sh.lineTo(W/2-R,-H/2);sh.quadraticCurveTo(W/2,-H/2,W/2,-H/2+R);sh.lineTo(W/2,H/2-R);sh.quadraticCurveTo(W/2,H/2,W/2-R,H/2);
+sh.lineTo(-W/2+R,H/2);sh.quadraticCurveTo(-W/2,H/2,-W/2,H/2-R);sh.lineTo(-W/2,-H/2+R);sh.quadraticCurveTo(-W/2,-H/2,-W/2+R,-H/2);
+[[-20,-14],[20,-14],[-20,14],[20,14]].forEach(([x,y])=>{const p=new THREE.Path();p.absarc(x,y,1.3,0,Math.PI*2,true);sh.holes.push(p);});
+const pg=new THREE.ExtrudeGeometry(sh,{depth:T,bevelEnabled:false,curveSegments:24});pg.translate(0,0,-T/2);
+const pcb=new THREE.Mesh(pg,[mats.pcb,mats.edge]);pcb.castShadow=true;pcb.receiveShadow=true;scene.add(pcb);
+// plated rings
+[[-20,-14],[20,-14],[-20,14],[20,14]].forEach(([x,y])=>{[ZT+.01,ZB-.01].forEach(z=>{const r=new THREE.Mesh(new THREE.RingGeometry(1.3,2.1,32),mats.gold);r.position.set(x,y,z);if(z<0)r.rotation.y=Math.PI;scene.add(r);});});
+// copper traces (thin gold lines) top
+function trace(pts,z=ZT+.02){for(let i=0;i<pts.length-1;i++){const [x1,y1]=pts[i],[x2,y2]=pts[i+1];const L=Math.hypot(x2-x1,y2-y1);const m=box(L+.35,.35,.04,M(0x1f8a50,{roughness:.4}),(x1+x2)/2,(y1+y2)/2,z);m.rotation.z=Math.atan2(y2-y1,x2-x1);m.castShadow=false;}}
+[[[-4.5,2],[0,2],[0,-6]],[[-4.5,6],[-2,6],[-2,4.5],[1,4.5]],[[-4.5,-2],[-1,-2],[2,1]],[[3.5,-6.5],[3.5,-11],[2,-13]],[[-2,-8],[-5,-8],[-8,-7]],[[-8,-11],[-8,-14],[-7,-14]],[[-15,-11],[-15,-6],[-12,-5]],[[8,-13],[10,-13],[11,-10]],[[6.5,-6.5],[10,-3],[12,1]],[[-4.5,9],[-2,9],[-2,10.5],[-1,10.5]]].forEach(t=>trace(t));
+
+// ---------- TOP components ----------
+// RAK3172 (LoRa + MCU)
+box(15,15.5,1.0,M(0x1d4e89),-12,3,ZT+.5);
+box(14,14.5,1.6,mats.metal,-12,3,ZT+1.8);
+label('RAK3172\nLoRa + MCU',12,7,-12,3,ZT+2.62,{fg:'#3b4450',fs:64});
+// helical antenna
+{const pts=[];for(let i=0;i<=400;i++){const t=i/400;const a=t*Math.PI*2*9;pts.push(new THREE.Vector3(-20+t*10,14.6+1.4*Math.cos(a),ZT+1.7+1.4*Math.sin(a)));}
+ const m=new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts),800,.22,8),mats.copper);m.castShadow=true;scene.add(m);
+ box(1.5,1.5,.4,mats.gold,-10,14.6,ZT+.2);}
+// DWM3000 (UWB)
+box(23,13,.9,mats.blue,10.5,10.5,ZT+.45);
+box(13,11,1.7,mats.metal,5.5,10.5,ZT+1.75);
+label('DWM3000\nUWB',11,6,5.5,10.5,ZT+2.62,{fg:'#3b4450',fs:60});
+box(8.5,11.5,.5,mats.white,17.6,10.5,ZT+1.15);
+box(5.5,1.2,.06,mats.gold,17.6,13,ZT+1.42);box(1.2,6,.06,mats.gold,17.6,10,ZT+1.42);box(5.5,1.2,.06,mats.gold,17.6,7.2,ZT+1.42);
+// SOS tactile switch
+box(6,6,1.6,mats.ic,-15,-10.5,ZT+.8);box(6.4,.6,.3,mats.metal,-15,-13.3,ZT+.15);box(6.4,.6,.3,mats.metal,-15,-7.7,ZT+.15);
+cyl(1.9,2.2,mats.red,-15,-10.5,ZT+2.7);
+// LEDs
+box(1.6,.8,.6,mats.ledR,-6.5,-14.5,ZT+.3);box(1.6,.8,.6,mats.ledG,-3.5,-14.5,ZT+.3);
+// vibration motor
+cyl(5,2.7,mats.metal,15.5,-8.5,ZT+1.35,64);cyl(4.2,.05,M(0xb0b6be,{metalness:.9,roughness:.25}),15.5,-8.5,ZT+2.73,64);
+// charger BQ24075 (QFN)
+box(3,3,.9,mats.ic,-2,-8,ZT+.45);label('BQ24075',3,1,-2,-8,ZT+.92,{fg:'#9aa3ad'});
+// battery protection
+box(2.9,1.6,1.1,mats.ic,-8.5,-6.5,ZT+.55);label('DW01A',2.6,.9,-8.5,-6.5,ZT+1.12,{fg:'#9aa3ad'});
+box(3,4.4,1,mats.ic,-8.5,-10.5,ZT+.5);label('8205A',2.8,1.2,-8.5,-10.5,ZT+1.02,{fg:'#9aa3ad'});
+for(let i=0;i<4;i++){box(.25,.6,.2,mats.metal,-9.6+i*.65,-12.9,ZT+.1);box(.25,.6,.2,mats.metal,-9.6+i*.65,-8.1,ZT+.1);}
+// buck TPS62840 + inductor
+box(1.6,1.6,.6,mats.ic,3.3,-6.5,ZT+.3);box(2.6,2.1,1.2,M(0x5d646d,{roughness:.7}),6.6,-6.5,ZT+.6);
+// LDO 1.8V
+box(2.9,1.6,1.1,mats.ic,2.5,-12.5,ZT+.55);
+// fuel gauge
+box(2,2,.75,mats.ic,8,-12.5,ZT+.38);
+// accelerometer
+box(2,2,1,mats.ic,2,1,ZT+.5);label('IMU',1.8,.8,2,1,ZT+1.02,{fg:'#9aa3ad'});
+// TVS + battery JST connector
+box(1.7,1.25,.8,mats.ic,-2,-14.6,ZT+.4);
+box(4.5,3.2,3,M(0xf4f1e6),-20.2,-3.5,ZT+1.5);
+// SWD pads
+[[0,0],[1.27,0],[2.54,0],[0,1.27],[1.27,1.27],[2.54,1.27]].forEach(([dx,dy])=>{const c=new THREE.Mesh(new THREE.CircleGeometry(.45,24),mats.gold);c.position.set(7.5+dx,0+dy,ZT+.02);scene.add(c);});
+// passives
+[[-3,-3.5,'c'],[-3,-4.6,'c'],[1,-3.5,'r'],[1,-10,'c'],[-0.2,-10.6,'c'],[5,-9.2,'c'],[6.6,-9.2,'c'],[0.2,-12.5,'c'],[5,-12.5,'c'],[10.3,-12.4,'r'],[-5.2,-12,'r'],[-5.2,-13.2,'r'],[-11.6,-14.2,'c'],[4.2,1,'c'],[4.2,2.2,'r'],[4.2,-.2,'r'],[-1,3.6,'c'],[-1,2.4,'c'],[-11.5,-5.6,'c'],[-5,-14.5,'r'],[-1,-14.6,'c'],[11,-15,'c'],[12.4,-2,'c'],[-18,-13.3,'c']].forEach(([x,y,k])=>{box(1,.5,.5,k=='c'?mats.cap:mats.res,x,y,ZT+.25);box(.22,.52,.52,mats.metal,x-.45,y,ZT+.25);box(.22,.52,.52,mats.metal,x+.45,y,ZT+.25);});
+// silkscreen
+label('PULSO  rev A',10,2.2,16.5,0,ZT+.03,{fg:'#ffffff'});
+label('SOS',3,1.4,-15,-6.4,ZT+.03,{fg:'#ffffff'});
+
+// ---------- BOTTOM components ----------
+const BOT=[];
+function bbox(w,h,d,mat,x,y,z){const m=box(w,h,d,mat,x,y,z);BOT.push(m);return m;}
+// light-shield foam ring + MAX30102
+{const s=new THREE.Shape();s.moveTo(-6,-4.5);s.lineTo(6,-4.5);s.lineTo(6,4.5);s.lineTo(-6,4.5);s.lineTo(-6,-4.5);const h=new THREE.Path();h.moveTo(-3.6,-2.5);h.lineTo(-3.6,2.5);h.lineTo(3.6,2.5);h.lineTo(3.6,-2.5);h.lineTo(-3.6,-2.5);s.holes.push(h);
+ const g=new THREE.ExtrudeGeometry(s,{depth:1.6,bevelEnabled:false});const m=new THREE.Mesh(g,mats.foam);m.position.set(0,0,ZB-1.6);m.castShadow=true;scene.add(m);}
+box(5.6,3.3,1.55,mats.ic,0,0,ZB-.78);
+box(2.0,1.5,.08,mats.glass,-1.1,0,ZB-1.57);box(2.0,1.5,.08,mats.glass,1.2,0,ZB-1.57);
+const l1=label('Sensor PPG',8,1.8,0,-6.2,ZB-.03,{fg:'#ffffff',flip:true});
+// pogo pads (charging)
+[-4.5,-1.5,1.5,4.5].forEach(x=>{const c=new THREE.Mesh(new THREE.CircleGeometry(1.1,32),mats.gold);c.position.set(x,-12.5,ZB-.02);c.rotation.y=Math.PI;scene.add(c);});
+label('+5V  TX  RX  GND',12,1.6,0,-10,ZB-.03,{fg:'#ffffff',flip:true});
+label('Carga magnética',9,1.6,0,-14.7,ZB-.03,{fg:'#ffffff',flip:true});
+// some passives bottom
+[[-8,2],[-8,0.8],[8,2],[8,.8],[-8,-2]].forEach(([x,y])=>{box(1,.5,.5,mats.cap,x,y,ZB-.25);});
+
+// ---------- battery (exploded) ----------
+const batt=new THREE.Group();scene.add(batt);
+{const b=new THREE.Mesh(new THREE.BoxGeometry(40,30,5.2),mats.batt);b.castShadow=true;b.receiveShadow=true;batt.add(b);
+ const lb=(()=>{const c=document.createElement('canvas');c.width=1200;c.height=600;const g=c.getContext('2d');g.fillStyle='#2b3a4c';g.font='700 92px Inter';g.textAlign='center';g.fillText('Li-Po 3,7 V',600,250);g.font='600 76px Inter';g.fillText('1200 mAh',600,360);const t=new THREE.CanvasTexture(c);return new THREE.Mesh(new THREE.PlaneGeometry(24,12),new THREE.MeshStandardMaterial({map:t,transparent:true}));})();
+ lb.position.set(0,0,2.62);batt.add(lb);
+ const tab=new THREE.Mesh(new THREE.BoxGeometry(6,3,1),M(0xe9c46a));tab.position.set(-14,15.5,0);batt.add(tab);}
+batt.position.set(0,0,-13);
+// wires battery -> JST
+function wire(pts,mat){const c=new THREE.CatmullRomCurve3(pts.map(p=>new THREE.Vector3(...p)));const m=new THREE.Mesh(new THREE.TubeGeometry(c,60,.35,10),mat);m.castShadow=true;scene.add(m);return m;}
+const w1=wire([[-14.6,2.5,-13],[-19,-1,-9],[-23.5,-3,-3],[-22.3,-3,ZT+1.6]],mats.wireR);
+const w2=wire([[-13.4,2.5,-13],[-18,-2,-9],[-23.5,-4.2,-3],[-22.3,-4.2,ZT+1.6]],mats.wireB);
+// make battery tab at top edge -> move tab to y=15.5? wires start near tab
+w1.position.set(0,13,0);w2.position.set(0,13,0);
+scene.remove(w1);scene.remove(w2);
+wire([[-14.6,15.5,-13],[-17,14,-10],[-23.8,4,-6],[-23.8,-2.9,-1],[-22.4,-2.9,ZT+1.8]],mats.wireR);
+wire([[-13.4,15.5,-13],[-16,13.5,-10],[-24.6,3,-6],[-24.6,-4.1,-1],[-22.4,-4.1,ZT+1.8]],mats.wireB);
+
+// ---------- lights ----------
+scene.add(new THREE.HemisphereLight(0xffffff,0xb8c2cc,1.1));
+const dl=new THREE.DirectionalLight(0xffffff,2.0);dl.position.set(-40,-60,120);dl.castShadow=true;dl.shadow.mapSize.set(4096,4096);
+Object.assign(dl.shadow.camera,{left:-60,right:60,top:60,bottom:-60,near:1,far:400});dl.shadow.bias=-0.0004;scene.add(dl);
+const dl2=new THREE.DirectionalLight(0xffffff,.7);dl2.position.set(60,40,-80);scene.add(dl2);
+const fill=new THREE.DirectionalLight(0xffffff,.5);fill.position.set(50,80,60);scene.add(fill);
+// floor shadow
+const floor=new THREE.Mesh(new THREE.PlaneGeometry(400,400),new THREE.ShadowMaterial({opacity:.16}));floor.position.z=-15.7;floor.receiveShadow=true;scene.add(floor);
+
+// ---------- render helper ----------
+function render(panelId,w,h,camPos,target,up,labels,hideBatt,fov){
+  const r=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true,alpha:true});
+  r.setPixelRatio(2);r.setSize(w,h);r.shadowMap.enabled=true;r.shadowMap.type=THREE.PCFSoftShadowMap;r.outputColorSpace=THREE.SRGBColorSpace;r.toneMapping=THREE.ACESFilmicToneMapping;r.toneMappingExposure=1.05;
+  document.getElementById(panelId).appendChild(r.domElement);
+  const cam=new THREE.PerspectiveCamera(fov,w/h,1,1000);cam.position.set(...camPos);cam.up.set(...up);cam.lookAt(new THREE.Vector3(...target));
+  batt.visible=!hideBatt;floor.visible=!hideBatt;
+  scene.children.forEach(o=>{if(o.isMesh&&o.geometry.type==='TubeGeometry'&&o.material===mats.wireR||o.material===mats.wireB)o.visible=!hideBatt;});
+  r.render(scene,cam);
+  // overlay labels
+  const NS='http://www.w3.org/2000/svg';const svg=document.createElementNS(NS,'svg');svg.setAttribute('class','ov');svg.setAttribute('width',w);svg.setAttribute('height',h);
+  const proj=p=>{const v=new THREE.Vector3(...p).project(cam);return [(v.x+1)/2*w,(1-v.y)/2*h];};
+  labels.forEach(L=>{const [px,py]=proj(L.p);const lx=L.side=='l'?L.x:L.x;const ly=L.y;
+    const ex=L.side=='l'?lx+8:lx-8;
+    const path=document.createElementNS(NS,'path');path.setAttribute('d',`M${px} ${py} L${L.side=='l'?ex+40:ex-40} ${ly} L${ex} ${ly}`);path.setAttribute('stroke','#1F3A5F');path.setAttribute('stroke-width','1.6');path.setAttribute('fill','none');svg.appendChild(path);
+    const c=document.createElementNS(NS,'circle');c.setAttribute('cx',px);c.setAttribute('cy',py);c.setAttribute('r',4.5);c.setAttribute('fill','#1F3A5F');c.setAttribute('stroke','#fff');c.setAttribute('stroke-width','1.5');svg.appendChild(c);
+    const t=document.createElementNS(NS,'text');t.setAttribute('x',L.side=='l'?lx:lx);t.setAttribute('y',ly-4);t.setAttribute('text-anchor',L.side=='l'?'end':'start');
+    t.setAttribute('style','font-size:15px;font-weight:700;fill:#1d2430');t.textContent=L.t;svg.appendChild(t);
+    const s=document.createElementNS(NS,'text');s.setAttribute('x',lx);s.setAttribute('y',ly+15);s.setAttribute('text-anchor',L.side=='l'?'end':'start');s.setAttribute('style','font-size:13px;fill:#5b6675');s.textContent=L.s;svg.appendChild(s);
+    if(L.side=='l'){t.setAttribute('x',lx);s.setAttribute('x',lx);} });
+  document.getElementById(panelId).appendChild(svg);
+}
+const LT=[
+ {t:'Antena LoRa helicoidal',s:'915 MHz',p:[-15,15.5,ZT+3],side:'l',x:250,y:120},
+ {t:'RAK3172',s:'microcontrolador + rádio LoRa',p:[-15,7,ZT+2.6],side:'l',x:250,y:225},
+ {t:'Conector da bateria',s:'JST 2 vias',p:[-20.2,-3.5,ZT+3],side:'l',x:250,y:330},
+ {t:'Botão SOS',s:'chave tátil vedada',p:[-15,-10.5,ZT+3.8],side:'l',x:250,y:435},
+ {t:'Proteção da bateria',s:'DW01A + FS8205A',p:[-8.5,-10.5,ZT+1],side:'l',x:250,y:540},
+ {t:'LEDs vermelho e verde',s:'status do SOS',p:[-6.5,-14.5,ZT+.6],side:'l',x:250,y:645},
+ {t:'Bateria Li-Po',s:'3,7 V · 1200 mAh',p:[-10,-10,-10.4],side:'l',x:250,y:760},
+ {t:'Módulo UWB DWM3000',s:'localização ±10 cm',p:[6,13,ZT+2.6],side:'r',x:1010,y:130},
+ {t:'Antena UWB',s:'integrada ao módulo',p:[18.5,12,ZT+1.45],side:'r',x:1010,y:250},
+ {t:'Acelerômetro (IMU)',s:'detecção de queda',p:[2,1,ZT+1],side:'r',x:1010,y:370},
+ {t:'Motor de vibração',s:'retorno ao trabalhador',p:[17,-6,ZT+2.7],side:'r',x:1010,y:490},
+ {t:'Gestão de energia',s:'carregador · conversor 3,3 V · LDO 1,8 V',p:[3.3,-6.5,ZT+.6],side:'r',x:1010,y:640},
+];
+render('p1',1260,860,[-12,-78,68],[0,-1,-4],[0,0,1],LT,false,34);
+const LB=[
+ {t:'Sensor MAX30102',s:'BPM e SpO2 (PPG)',p:[0,0,ZB-1.6],side:'r',x:440,y:250},
+ {t:'Espuma bloqueadora',s:'evita luz externa',p:[-5,3,ZB-1.6],side:'r',x:440,y:380},
+ {t:'Contatos de carga',s:'pogo pins magnéticos',p:[-4.5,-12.5,ZB],side:'r',x:440,y:620},
+];
+const bl=new THREE.DirectionalLight(0xffffff,1.8);bl.position.set(-30,-70,-120);scene.add(bl);
+const bl2=new THREE.DirectionalLight(0xffffff,.6);bl2.position.set(40,20,-60);scene.add(bl2);
+// bottom view: camera below, mirrored so it reads naturally
+render('p2',620,860,[-37,-150,-158],[-9,-1,0],[0,0,-1],LB,true,30);
+window.__done=true;
+</script>
+</body></html>
