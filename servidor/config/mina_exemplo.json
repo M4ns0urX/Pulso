@@ -1,0 +1,54 @@
+{
+  "nome": "Mina exemplo",
+  "observacao": "Coordenadas em metros. x para a direita, y para baixo no mapa em planta. Cada galeria é um trecho reto entre dois pontos.",
+  "niveis": [
+    {
+      "id": "N150",
+      "nome": "Nível −150 m",
+      "z": -150,
+      "galerias": [
+        {"zona": "N-1", "de": [10, 50],  "ate": [60, 50]},
+        {"zona": "N-1", "de": [60, 50],  "ate": [130, 50]},
+        {"zona": "N-1", "de": [130, 50], "ate": [185, 50]},
+        {"zona": "N-2", "de": [60, 50],  "ate": [60, 105]},
+        {"zona": "N-3", "de": [130, 50], "ate": [130, 10]},
+        {"zona": "N-3", "de": [130, 10], "ate": [185, 10]},
+        {"zona": "Rampa", "de": [10, 50], "ate": [10, 110]}
+      ],
+      "gateways": [[45, 50], [130, 30], [160, 50], [60, 90]]
+    },
+    {
+      "id": "N300",
+      "nome": "Nível −300 m",
+      "z": -300,
+      "galerias": [
+        {"zona": "Rampa", "de": [10, 60],  "ate": [40, 60]},
+        {"zona": "Principal", "de": [40, 60],  "ate": [90, 60]},
+        {"zona": "Principal", "de": [90, 60],  "ate": [150, 60]},
+        {"zona": "Principal", "de": [150, 60], "ate": [190, 60]},
+        {"zona": "S-1", "de": [40, 60],  "ate": [40, 15]},
+        {"zona": "S-1", "de": [40, 15],  "ate": [150, 15]},
+        {"zona": "S-3", "de": [150, 15], "ate": [150, 60]},
+        {"zona": "S-4", "de": [150, 15], "ate": [190, 15]},
+        {"zona": "S-2", "de": [90, 60],  "ate": [90, 112]},
+        {"zona": "S-2", "de": [90, 95],  "ate": [168, 95]}
+      ],
+      "gateways": [[25, 60], [95, 15], [170, 15], [120, 60], [90, 100], [150, 95]]
+    }
+  ],
+  "ancoras": {"espacamento_m": 20, "deslocamento_parede_m": 2, "altura_teto_m": 3.0},
+  "trabalhadores": [
+    {"id": 321, "nome": "Carlos M.",  "funcao": "Operador de perfuratriz", "nivel": "N300", "zona_inicial": "S-2"},
+    {"id": 322, "nome": "Ana R.",     "funcao": "Técnica de segurança",    "nivel": "N300", "zona_inicial": "S-2"},
+    {"id": 323, "nome": "João P.",    "funcao": "Eletricista",             "nivel": "N300", "zona_inicial": "S-1"},
+    {"id": 324, "nome": "Marcos L.",  "funcao": "Operador de carregadeira","nivel": "N300", "zona_inicial": "S-3"},
+    {"id": 325, "nome": "Pedro A.",   "funcao": "Geólogo",                 "nivel": "N300", "zona_inicial": "S-4"},
+    {"id": 326, "nome": "Rita F.",    "funcao": "Topógrafa",               "nivel": "N300", "zona_inicial": "Principal"},
+    {"id": 327, "nome": "Lucas T.",   "funcao": "Mecânico",                "nivel": "N300", "zona_inicial": "S-1"},
+    {"id": 328, "nome": "Bruno S.",   "funcao": "Operador de perfuratriz", "nivel": "N150", "zona_inicial": "N-1"},
+    {"id": 329, "nome": "Fernanda C.","funcao": "Engenheira de minas",     "nivel": "N150", "zona_inicial": "N-3"},
+    {"id": 330, "nome": "Diego M.",   "funcao": "Ajudante geral",          "nivel": "N150", "zona_inicial": "N-2"},
+    {"id": 331, "nome": "Paulo V.",   "funcao": "Blaster",                 "nivel": "N150", "zona_inicial": "N-1"},
+    {"id": 332, "nome": "Sérgio N.",  "funcao": "Operador de caminhão",    "nivel": "N150", "zona_inicial": "Rampa"}
+  ]
+}

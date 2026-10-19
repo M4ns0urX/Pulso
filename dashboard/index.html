@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pulso · Sala de controle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topo">
+  <div class="marca"><span class="logo">PULSO</span><span class="sub">Sala de controle</span></div>
+  <div class="info">
+    <span id="mina">—</span>
+    <span class="sep">·</span>
+    <span id="relogio">--:--:--</span>
+    <span class="conexao" id="conexao" title="Conexão com o servidor"></span>
+  </div>
+</header>
+
+<section id="alertas" class="alertas" aria-live="assertive"></section>
+
+<main class="grade">
+  <section class="painel mapa">
+    <div class="painel-topo">
+      <div class="abas" id="abas"></div>
+      <span class="dica">Mapa em planta · atualizado a cada 5 s</span>
+    </div>
+    <svg id="svgmapa" role="img" aria-label="Mapa da mina com a posição dos trabalhadores"></svg>
+    <div class="legenda">
+      <span><i class="pt normal"></i>normal</span>
+      <span><i class="pt aviso"></i>aviso</span>
+      <span><i class="pt alto"></i>alto</span>
+      <span><i class="pt critico"></i>emergência</span>
+      <span><i class="pt semsinal"></i>sem sinal</span>
+      <span><i class="anc"></i>âncora UWB</span>
+      <span><i class="gw"></i>gateway LoRa</span>
+    </div>
+  </section>
+
+  <aside class="lateral">
+    <div class="kpis">
+      <div class="kpi"><small>No subsolo</small><b id="k-sub">0</b></div>
+      <div class="kpi crit"><small>Emergências</small><b id="k-crit">0</b></div>
+      <div class="kpi"><small>Alertas ativos</small><b id="k-al">0</b></div>
+      <div class="kpi"><small>Sem sinal</small><b id="k-ss">0</b></div>
+    </div>
+
+    <div class="painel lista">
+      <table>
+        <thead><tr><th>Trabalhador</th><th>Zona</th><th>BPM</th><th>SpO2</th><th>Bat.</th></tr></thead>
+        <tbody id="tabela"></tbody>
+      </table>
+    </div>
+
+    <div class="painel detalhe" id="detalhe">
+      <div class="det-topo">
+        <div><b id="d-nome">Selecione um trabalhador</b><small id="d-func"></small></div>
+        <span id="d-status" class="chip"></span>
+      </div>
+      <div class="graf">
+        <div class="graf-tit"><span>BPM · últimos 5 min</span><b id="d-bpm">—</b></div>
+        <svg id="g-bpm" viewBox="0 0 300 70" preserveAspectRatio="none"></svg>
+        <div class="graf-tit"><span>SpO2 · últimos 5 min</span><b id="d-spo2">—</b></div>
+        <svg id="g-spo2" viewBox="0 0 300 70" preserveAspectRatio="none"></svg>
+      </div>
+      <div class="sim">
+        <small>Digital twin · simular evento</small>
+        <div class="botoes">
+          <button data-acao="sos">SOS</button>
+          <button data-acao="gas">Gás / SpO2 baixo</button>
+          <button data-acao="queda">Queda</button>
+          <button data-acao="sem_sinal">Sem sinal</button>
+          <button data-acao="normalizar" class="ok">Normalizar</button>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <section class="painel eventos">
+    <div class="painel-topo"><b>Linha do tempo</b><span class="dica" id="rede"></span></div>
+    <ul id="eventos"></ul>
+  </section>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<style>
+:root{--navy:#1F3A5F;--teal:#0E7C7B;--red:#B83227;--amber:#B7791F;--ink:#1d2430;--mute:#5b6675;--line:#CBD3DD;--bg2:#F3F5F8}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,sans-serif;color:var(--ink);background:#fff}
+.fig{background:#fff;padding:36px 40px;position:relative}
+h2{font-size:22px;font-weight:700;color:var(--navy);margin-bottom:18px}
+h3{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:14px}
+#s1{width:1760px}
+svg text{font-family:Inter}
+.lt{font-size:15px;font-weight:700;fill:#1F3A5F}
+.ls{font-size:12.5px;fill:#5b6675}
+.bt{font-size:14px;fill:#1d2430}
+.bb{font-size:14px;font-weight:700;fill:#1d2430}
+.tm{font-size:13px;font-weight:700;fill:#fff}
+.al{font-size:12.5px;font-weight:600;fill:#5b6675}
+/* fig 2 */
+#s2{width:1600px}
+.cols{display:flex;gap:26px}
+.card{flex:1;border:2px solid var(--line);border-radius:12px;padding:20px 22px}
+.trig{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #E6EAF0;font-size:14.5px;line-height:1.4}
+.trig:last-child{border-bottom:0}
+.tag{flex:none;font-size:11.5px;font-weight:700;color:#fff;border-radius:20px;padding:3px 10px;margin-top:1px}
+.man{background:var(--red)}.aut{background:var(--navy)}.opt{background:#8995A5}
+.esc{position:relative;padding-left:30px}
+.esc:before{content:"";position:absolute;left:10px;top:8px;bottom:8px;width:3px;background:linear-gradient(#B83227,#D35400,#B7791F,#0E7C7B);border-radius:2px}
+.ev{position:relative;margin-bottom:18px}
+.ev:last-child{margin-bottom:0}
+.ev:before{content:"";position:absolute;left:-26px;top:3px;width:14px;height:14px;border-radius:50%;background:#fff;border:3px solid var(--c)}
+.ev .w{font-size:13px;font-weight:700;color:var(--c);letter-spacing:.3px}
+.ev .d{font-size:14.5px;line-height:1.4;margin-top:2px}
+.pr{display:flex;gap:12px;padding:9px 0;font-size:14.5px;line-height:1.4;border-bottom:1px solid #E6EAF0}
+.pr:last-child{border-bottom:0}
+.pr .ic{flex:none;width:22px;height:22px;border-radius:6px;background:#E2F0EF;color:var(--teal);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.pr b{color:var(--navy)}
+</style></head><body>
+
+<!-- =========== FIGURA SOS 1: sequência =========== -->
+<div class="fig" id="s1">
+<h2>Sequência de um acionamento do botão SOS</h2>
+<svg width="1680" height="640" viewBox="0 0 1680 640">
+ <defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#B83227"/></marker>
+ <marker id="g" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#0E7C7B"/></marker></defs>
+ <!-- time axis -->
+ <line x1="210" y1="34" x2="1670" y2="34" stroke="#CBD3DD" stroke-width="2"/>
+ <text x="12" y="39" class="ls" font-weight="700">TEMPO</text>
+ <g>
+  <rect x="270" y="20" width="60" height="28" rx="14" fill="#B83227"/><text x="300" y="39" class="tm" text-anchor="middle">0 s</text>
+  <rect x="460" y="20" width="80" height="28" rx="14" fill="#B83227"/><text x="500" y="39" class="tm" text-anchor="middle">2 s</text>
+  <rect x="655" y="20" width="90" height="28" rx="14" fill="#B83227"/><text x="700" y="39" class="tm" text-anchor="middle">&lt; 2,5 s</text>
+  <rect x="860" y="20" width="80" height="28" rx="14" fill="#B83227"/><text x="900" y="39" class="tm" text-anchor="middle">&lt; 3 s</text>
+  <rect x="1060" y="20" width="80" height="28" rx="14" fill="#B83227"/><text x="1100" y="39" class="tm" text-anchor="middle">&lt; 5 s</text>
+  <rect x="1245" y="20" width="110" height="28" rx="14" fill="#1F3A5F"/><text x="1300" y="39" class="tm" text-anchor="middle">até 30 s</text>
+  <rect x="1445" y="20" width="110" height="28" rx="14" fill="#0E7C7B"/><text x="1500" y="39" class="tm" text-anchor="middle">logo após</text>
+ </g>
+ <!-- lanes -->
+ <g>
+  <rect x="0" y="70" width="1680" height="130" rx="10" fill="#FBF3F2"/>
+  <rect x="0" y="210" width="1680" height="130" rx="10" fill="#F3F5F8"/>
+  <rect x="0" y="350" width="1680" height="130" rx="10" fill="#F3F5F8"/>
+  <rect x="0" y="490" width="1680" height="130" rx="10" fill="#EAF1F8"/>
+  <text x="20" y="128" class="lt">Trabalhador</text><text x="20" y="150" class="ls">braçadeira Pulso</text>
+  <text x="20" y="268" class="lt">Rede LoRa</text><text x="20" y="290" class="ls">gateways da galeria</text>
+  <text x="20" y="408" class="lt">Servidor</text><text x="20" y="430" class="ls">na superfície</text>
+  <text x="20" y="548" class="lt">Sala de controle</text><text x="20" y="570" class="ls">operador e resgate</text>
+ </g>
+ <!-- boxes: w176 h92 ; lane centers 135,275,415,555 -->
+ <g stroke-width="2">
+  <rect x="212" y="89" width="176" height="92" rx="10" fill="#fff" stroke="#B83227" stroke-width="3"/>
+  <rect x="412" y="89" width="176" height="92" rx="10" fill="#fff" stroke="#CBD3DD"/>
+  <rect x="612" y="229" width="176" height="92" rx="10" fill="#fff" stroke="#CBD3DD"/>
+  <rect x="812" y="369" width="176" height="92" rx="10" fill="#fff" stroke="#CBD3DD"/>
+  <rect x="1012" y="509" width="176" height="92" rx="10" fill="#fff" stroke="#B83227" stroke-width="3"/>
+  <rect x="1212" y="509" width="176" height="92" rx="10" fill="#fff" stroke="#CBD3DD"/>
+  <rect x="1412" y="89" width="176" height="92" rx="10" fill="#fff" stroke="#0E7C7B" stroke-width="3"/>
+ </g>
+ <g>
+  <text x="228" y="115" class="bb">1. Aciona o SOS</text><text x="228" y="137" class="bt">Segura o botão</text><text x="228" y="157" class="bt">por 2 segundos</text>
+  <text x="428" y="115" class="bb">2. Aviso ao usuário</text><text x="428" y="137" class="bt">Vibra e acende</text><text x="428" y="157" class="bt">LED vermelho</text>
+  <text x="628" y="255" class="bb">3. Envio prioritário</text><text x="628" y="277" class="bt">Sai na hora, sem</text><text x="628" y="297" class="bt">esperar o ciclo de 5 s</text>
+  <text x="828" y="395" class="bb">4. Registra o alerta</text><text x="828" y="417" class="bt">Nível crítico + posição</text><text x="828" y="437" class="bt">UWB (±10 cm)</text>
+  <text x="1028" y="535" class="bb">5. Alarme na tela</text><text x="1028" y="557" class="bt">Som + trabalhador</text><text x="1028" y="577" class="bt">piscando no mapa</text>
+  <text x="1228" y="535" class="bb">6. Operador assume</text><text x="1228" y="557" class="bt">Clica "Recebido" e</text><text x="1228" y="577" class="bt">despacha o resgate</text>
+  <text x="1428" y="115" class="bb">7. Retorno ao usuário</text><text x="1428" y="137" class="bt">LED verde: "ajuda</text><text x="1428" y="157" class="bt">a caminho"</text>
+ </g>
+ <!-- arrows -->
+ <g fill="none" stroke="#B83227" stroke-width="2.6">
+  <path d="M388 135 H408" marker-end="url(#a)"/>
+  <path d="M588 135 H600 V275 H608" marker-end="url(#a)"/>
+  <path d="M788 275 H800 V415 H808" marker-end="url(#a)"/>
+  <path d="M988 415 H1000 V555 H1008" marker-end="url(#a)"/>
+  <path d="M1188 555 H1208" marker-end="url(#a)"/>
+ </g>
+ <path d="M1388 555 H1400 V135 H1408" fill="none" stroke="#0E7C7B" stroke-width="2.6" stroke-dasharray="7 5" marker-end="url(#g)"/>
+ <text x="1408" y="345" class="al" fill="#0E7C7B" style="fill:#0E7C7B">confirmação</text><text x="1408" y="362" class="al" style="fill:#0E7C7B">volta pela rede</text>
+ <!-- retry note -->
+ <path d="M700 229 C700 200 760 200 760 225" fill="none" stroke="#B83227" stroke-width="2" marker-end="url(#a)"/>
+ <text x="770" y="206" class="al">repete até receber confirmação</text>
+</svg>
+</div>
+
+<!-- =========== FIGURA SOS 2: gatilhos, escalonamento, proteções =========== -->
+<div class="fig" id="s2">
+<h2>Sistema de emergência: gatilhos, escalonamento e proteções</h2>
+<div class="cols">
+ <div class="card"><h3>O que dispara uma emergência</h3>
+  <div class="trig"><span class="tag man">Manual</span><div><b>Botão SOS</b>: o próprio trabalhador pede ajuda.</div></div>
+  <div class="trig"><span class="tag aut">Automático</span><div><b>SpO2 abaixo de 90%</b>: falta de oxigênio ou gás no ambiente.</div></div>
+  <div class="trig"><span class="tag aut">Automático</span><div><b>BPM fora da faixa</b> (abaixo de 40 ou acima de 150) por 30 s.</div></div>
+  <div class="trig"><span class="tag aut">Automático</span><div><b>Sem sinal por 30 s</b>: braçadeira danificada ou trabalhador em área isolada.</div></div>
+  <div class="trig"><span class="tag opt">Futuro</span><div><b>Queda ou imobilidade</b>: exige acelerômetro (IMU) no hardware.</div></div>
+ </div>
+ <div class="card"><h3>Escalonamento se ninguém responder</h3>
+  <div class="esc">
+   <div class="ev" style="--c:#B83227"><div class="w">0 s</div><div class="d">Alarme sonoro e visual no dashboard, com a posição exata no mapa.</div></div>
+   <div class="ev" style="--c:#D35400"><div class="w">30 s SEM "RECEBIDO"</div><div class="d">Alarme reforçado e aviso ao supervisor do turno por rádio ou SMS.</div></div>
+   <div class="ev" style="--c:#B7791F"><div class="w">2 MIN SEM "RECEBIDO"</div><div class="d">Aciona a brigada de emergência e o gerente de HSE.</div></div>
+   <div class="ev" style="--c:#0E7C7B"><div class="w">ENCERRAMENTO</div><div class="d">Operador fecha o caso. Ficam registrados horários, quem atendeu e tempo de resposta (relatório NR-22).</div></div>
+  </div>
+ </div>
+ <div class="card"><h3>Proteções contra falhas</h3>
+  <div class="pr"><span class="ic">1</span><div><b>Botão protegido e segurar 2 s:</b> evita acionamento acidental por batida.</div></div>
+  <div class="pr"><span class="ic">2</span><div><b>Reenvio automático:</b> o SOS é repetido até chegar a confirmação.</div></div>
+  <div class="pr"><span class="ic">3</span><div><b>Reserva de bateria:</b> com carga muito baixa, desliga os sensores e mantém só SOS e localização.</div></div>
+  <div class="pr"><span class="ic">4</span><div><b>Silêncio também é alerta:</b> braçadeira que para de transmitir gera alerta próprio.</div></div>
+  <div class="pr"><span class="ic">5</span><div><b>Falso alarme:</b> só o operador encerra, após contato por rádio. O caso fica registrado.</div></div>
+ </div>
+</div>
+</div>
+</body></html>

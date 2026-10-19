@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<style>
+:root{--navy:#1F3A5F;--teal:#0E7C7B;--red:#B83227;--amber:#B7791F;--ink:#1d2430;--mute:#5b6675;--line:#CBD3DD;--bg2:#F3F5F8}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,sans-serif;color:var(--ink);background:#fff}
+.fig{background:#fff;padding:36px 40px;position:relative}
+h2{font-size:22px;font-weight:700;color:var(--navy);margin-bottom:22px;letter-spacing:-.2px}
+h3{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:12px}
+/* ---------- FIG 1 ---------- */
+#f1{width:1700px}
+.zones{display:flex;gap:20px}
+.zone{border-radius:14px;padding:18px 22px 24px}
+.zone .zt{font-size:13px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;margin-bottom:16px}
+.sub{background:#F6F0E7;width:640px}.sub .zt{color:#8A5A2B}
+.sup{background:#EAF1F8;flex:1}.sup .zt{color:var(--navy)}
+.row{display:flex;align-items:stretch}
+.box{background:#fff;border:2px solid var(--line);border-radius:12px;padding:18px 18px 16px;width:250px;min-height:250px}
+.box .n{display:inline-flex;width:30px;height:30px;border-radius:50%;background:var(--navy);color:#fff;font-weight:700;font-size:15px;align-items:center;justify-content:center;margin-bottom:10px}
+.box .t{font-size:18px;font-weight:700;line-height:1.25;margin-bottom:12px;color:var(--navy)}
+.box ul{list-style:none;font-size:14.5px;line-height:1.5;color:var(--ink)}
+.box li{padding-left:14px;position:relative;margin-bottom:4px}
+.box li:before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.box.db{border-color:var(--teal);border-width:3px}
+.box.db .n{background:var(--teal)}
+.arrow{width:70px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:12px;color:var(--mute);font-weight:600;text-align:center;line-height:1.25}
+.arrow svg{margin:6px 0}
+.cross{width:90px;margin:0 -20px;z-index:2}
+.alertpath{margin-top:18px;display:flex;align-items:center;gap:14px;padding:12px 18px;border:2px dashed var(--red);border-radius:10px;color:var(--red);font-weight:600;font-size:14.5px;background:#FDF3F2}
+.pkt{margin-top:18px;font-size:14px;color:var(--mute)}
+.pkt b{color:var(--ink)}
+.chip{display:inline-block;background:var(--bg2);border:1px solid var(--line);border-radius:6px;padding:3px 9px;margin:0 3px;font-size:13px;color:var(--ink);font-weight:600}
+/* ---------- FIG 2 ---------- */
+#f2{width:1600px;height:800px}
+.tbl{position:absolute;width:400px;border:2px solid var(--line);border-radius:10px;overflow:hidden;background:#fff}
+.tbl .hd{padding:11px 16px;color:#fff;font-weight:700;font-size:17px;display:flex;justify-content:space-between;align-items:center}
+.tbl .hd span{font-size:12px;font-weight:600;opacity:.85}
+.tbl .r{display:flex;justify-content:space-between;padding:7px 16px;font-size:14.5px;border-top:1px solid #E6EAF0}
+.tbl .r:nth-child(odd){background:#FAFBFC}
+.k{font-size:11px;font-weight:700;padding:2px 7px;border-radius:5px}
+.pk{background:#FFF4D6;color:#8A6100}.fk{background:#E3EEF9;color:#24548A}
+.cad .hd{background:var(--navy)} .ts .hd{background:var(--teal)} .ev .hd{background:var(--red)}
+.ts{border-color:var(--teal);border-width:3px}
+.note{position:absolute;font-size:13px;color:var(--mute);width:400px;text-align:center}
+.lines{position:absolute;inset:0;pointer-events:none}
+.lbl{font-family:Inter;font-size:13px;font-weight:600;fill:var(--mute)}
+.legend{position:absolute;left:40px;bottom:34px;display:flex;gap:28px;font-size:14px;color:var(--ink);align-items:center}
+.sw{display:inline-block;width:16px;height:16px;border-radius:4px;vertical-align:-3px;margin-right:7px}
+/* ---------- FIG 3 ---------- */
+#f3{width:1600px}
+.steps{display:flex;align-items:stretch;gap:0}
+.st{flex:1;background:var(--bg2);border-radius:10px;padding:16px 16px;border-top:5px solid var(--navy)}
+.st .n{font-size:13px;font-weight:700;color:var(--teal);letter-spacing:.5px}
+.st .t{font-size:17px;font-weight:700;color:var(--navy);margin:4px 0 8px}
+.st p{font-size:14px;line-height:1.45;color:var(--ink)}
+.st.al{border-top-color:var(--red)}
+.st.db{border-top-color:var(--teal)}
+.sa{width:34px;display:flex;align-items:center;justify-content:center}
+.two{display:flex;gap:28px;margin-top:30px}
+.card{flex:1;border:2px solid var(--line);border-radius:12px;padding:20px 22px}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+td,th{padding:9px 10px;text-align:left;border-bottom:1px solid #E6EAF0}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.8px;color:var(--mute)}
+.lv{font-size:12px;font-weight:700;padding:3px 9px;border-radius:20px;color:#fff;white-space:nowrap}
+.c{background:var(--red)}.a{background:#D35400}.w{background:var(--amber)}
+.ret{display:flex;flex-direction:column;gap:14px}
+.bar{display:flex;align-items:center;gap:14px}
+.bar .lab{width:190px;font-size:14.5px;font-weight:600}
+.bar .lab small{display:block;font-weight:400;color:var(--mute);font-size:12.5px}
+.bar .tr{flex:1;height:34px;background:var(--bg2);border-radius:8px;position:relative;overflow:hidden}
+.bar .fl{position:absolute;left:0;top:0;bottom:0;border-radius:8px;display:flex;align-items:center;padding-left:12px;color:#fff;font-weight:700;font-size:13.5px}
+.sec{margin-top:28px;background:#F2F7F6;border-radius:12px;padding:18px 22px;display:flex;gap:24px;align-items:flex-start}
+.sec .ic{flex:none;width:44px;height:44px;border-radius:10px;background:var(--teal);display:flex;align-items:center;justify-content:center}
+.sec .g{display:grid;grid-template-columns:1fr 1fr;gap:8px 30px;font-size:14.5px;line-height:1.45;flex:1}
+.sec .g div b{color:var(--teal)}
+</style></head><body>
+
+<!-- ================= FIGURA 1 ================= -->
+<div class="fig" id="f1">
+<h2>Caminho do dado: da braçadeira ao dashboard</h2>
+<div class="zones">
+ <div class="zone sub"><div class="zt">Subsolo · dentro da mina</div>
+  <div class="row">
+   <div class="box"><div class="n">1</div><div class="t">Braçadeira Pulso</div>
+    <ul><li>Mede BPM e SpO2</li><li>Posição UWB (±10 cm)</li><li>Botão de SOS</li><li>Envia um pacote a cada 5 s</li></ul></div>
+   <div class="arrow">rádio<br>LoRa<svg width="56" height="18"><line x1="2" y1="9" x2="44" y2="9" stroke="#1F3A5F" stroke-width="3"/><path d="M42 2 L54 9 L42 16 Z" fill="#1F3A5F"/></svg></div>
+   <div class="box"><div class="n">2</div><div class="t">Gateways LoRa + âncoras UWB</div>
+    <ul><li>Recebem os pacotes nas galerias</li><li>Encaminham para a superfície</li><li>Guardam em buffer se o link cair</li></ul></div>
+  </div>
+ </div>
+ <div class="arrow cross">cabo /<br>fibra<svg width="70" height="18"><line x1="2" y1="9" x2="58" y2="9" stroke="#1F3A5F" stroke-width="3"/><path d="M56 2 L68 9 L56 16 Z" fill="#1F3A5F"/></svg></div>
+ <div class="zone sup"><div class="zt">Superfície · servidor e sala de controle</div>
+  <div class="row">
+   <div class="box"><div class="n">3</div><div class="t">Servidor de ingestão</div>
+    <ul><li>Valida e filtra as leituras</li><li>Descobre a zona da mina</li><li>Dispara alertas em &lt; 3 s</li></ul></div>
+   <div class="arrow">grava<svg width="56" height="18"><line x1="2" y1="9" x2="44" y2="9" stroke="#0E7C7B" stroke-width="3"/><path d="M42 2 L54 9 L42 16 Z" fill="#0E7C7B"/></svg></div>
+   <div class="box db"><div class="n">4</div><div class="t">Banco de dados</div>
+    <ul><li>Leituras (séries temporais)</li><li>Cadastro, turnos e alertas</li><li>Backup diário automático</li></ul></div>
+   <div class="arrow">consulta<svg width="56" height="18"><line x1="2" y1="9" x2="44" y2="9" stroke="#1F3A5F" stroke-width="3"/><path d="M42 2 L54 9 L42 16 Z" fill="#1F3A5F"/></svg></div>
+   <div class="box"><div class="n">5</div><div class="t">Dashboard e relatórios</div>
+    <ul><li>Mapa da mina ao vivo</li><li>Painel de alertas e SOS</li><li>Relatórios NR-22 e ESG</li></ul></div>
+  </div>
+  <div class="alertpath"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M12 2 L23 21 H1 Z" fill="#B83227"/><rect x="11" y="8" width="2" height="7" fill="#fff"/><rect x="11" y="17" width="2" height="2" fill="#fff"/></svg>
+  Atalho de emergência: alertas e SOS vão do servidor (3) direto para o dashboard (5), sem esperar o banco.</div>
+ </div>
+</div>
+<div class="pkt"><b>Conteúdo de cada pacote (~20 bytes):</b>
+ <span class="chip">ID da braçadeira</span><span class="chip">horário</span><span class="chip">BPM</span><span class="chip">SpO2</span><span class="chip">posição x, y, z</span><span class="chip">bateria</span><span class="chip">SOS</span></div>
+</div>
+
+<!-- ================= FIGURA 2 ================= -->
+<div class="fig" id="f2">
+<h2>Estrutura do banco de dados</h2>
+<svg class="lines" width="1600" height="860">
+ <defs><marker id="m" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#8995A5"/></marker></defs>
+ <!-- trabalhador -> braçadeira -->
+ <line x1="440" y1="170" x2="596" y2="170" stroke="#8995A5" stroke-width="2.5" marker-end="url(#m)"/><text x="518" y="160" class="lbl" text-anchor="middle">usa</text>
+ <!-- trabalhador -> turno -->
+ <line x1="240" y1="322" x2="240" y2="396" stroke="#8995A5" stroke-width="2.5" marker-end="url(#m)"/><text x="252" y="364" class="lbl">registra</text>
+ <!-- braçadeira -> leitura -->
+ <line x1="800" y1="322" x2="800" y2="396" stroke="#0E7C7B" stroke-width="3" marker-end="url(#m)"/><text x="812" y="364" class="lbl">envia a cada 5 s</text>
+ <!-- leitura -> alerta -->
+ <line x1="1000" y1="540" x2="1156" y2="540" stroke="#B83227" stroke-width="3" marker-end="url(#m)"/><text x="1078" y="530" class="lbl" text-anchor="middle">gera</text>
+ <!-- zona -> alerta -->
+ <line x1="1360" y1="322" x2="1360" y2="396" stroke="#8995A5" stroke-width="2.5" marker-end="url(#m)"/><text x="1372" y="364" class="lbl">localiza</text>
+ <!-- zona -> leitura (elbow) -->
+ <path d="M1160 290 H1080 V430 H1004" fill="none" stroke="#8995A5" stroke-width="2.5" marker-end="url(#m)"/><text x="1088" y="372" class="lbl">localiza</text>
+</svg>
+
+<div class="tbl cad" style="left:40px;top:90px"><div class="hd">TRABALHADOR <span>cadastro</span></div>
+ <div class="r">id <i class="k pk">PK</i></div><div class="r">nome</div><div class="r">matrícula</div><div class="r">função</div><div class="r">empresa / contratada</div></div>
+<div class="tbl cad" style="left:600px;top:90px"><div class="hd">BRAÇADEIRA <span>cadastro</span></div>
+ <div class="r">id <i class="k pk">PK</i></div><div class="r">número de série</div><div class="r">trabalhador_id <i class="k fk">FK</i></div><div class="r">versão do firmware</div><div class="r">status (ativa, manutenção)</div></div>
+<div class="tbl cad" style="left:1160px;top:90px"><div class="hd">ZONA DA MINA <span>mapa</span></div>
+ <div class="r">id <i class="k pk">PK</i></div><div class="r">nome (ex.: Galeria N-3)</div><div class="r">nível / profundidade (m)</div><div class="r">área no mapa (polígono)</div><div class="r">nível de risco</div></div>
+
+<div class="tbl cad" style="left:40px;top:400px"><div class="hd">TURNO <span>entrada e saída</span></div>
+ <div class="r">id <i class="k pk">PK</i></div><div class="r">trabalhador_id <i class="k fk">FK</i></div><div class="r">braçadeira_id <i class="k fk">FK</i></div><div class="r">horário de entrada</div><div class="r">horário de saída</div></div>
+<div class="tbl ts" style="left:600px;top:400px"><div class="hd">LEITURA <span>série temporal</span></div>
+ <div class="r">horário</div><div class="r">braçadeira_id <i class="k fk">FK</i></div><div class="r">BPM</div><div class="r">SpO2 (%)</div><div class="r">posição x, y, z</div><div class="r">zona_id <i class="k fk">FK</i></div><div class="r">bateria (%)</div></div>
+<div class="note" style="left:600px;top:722px">maior tabela: ~17 mil linhas por trabalhador por dia</div>
+<div class="tbl ev" style="left:1160px;top:400px"><div class="hd">ALERTA <span>eventos</span></div>
+ <div class="r">id <i class="k pk">PK</i></div><div class="r">horário</div><div class="r">braçadeira_id <i class="k fk">FK</i></div><div class="r">tipo (SOS, SpO2, BPM, sinal)</div><div class="r">posição no momento</div><div class="r">status (aberto, atendido)</div><div class="r">atendido por / quando</div></div>
+
+<div class="legend">
+ <span><i class="sw" style="background:#1F3A5F"></i>Cadastro: muda pouco</span>
+ <span><i class="sw" style="background:#0E7C7B"></i>Série temporal: cresce o tempo todo</span>
+ <span><i class="sw" style="background:#B83227"></i>Eventos: guardados para auditoria</span>
+ <span><i class="k pk">PK</i> identificador único</span>
+ <span><i class="k fk">FK</i> ligação com outra tabela</span>
+</div>
+</div>
+
+<!-- ================= FIGURA 3 ================= -->
+<div class="fig" id="f3">
+<h2>Tratamento dos dados coletados</h2>
+<div class="steps">
+ <div class="st"><div class="n">ETAPA 1</div><div class="t">Receber</div><p>Decodifica o pacote LoRa e confere se chegou íntegro.</p></div>
+ <div class="sa"><svg width="20" height="20"><path d="M4 2 L16 10 L4 18 Z" fill="#8995A5"/></svg></div>
+ <div class="st"><div class="n">ETAPA 2</div><div class="t">Validar</div><p>Descarta valores impossíveis (ex.: SpO2 acima de 100%) e pacotes repetidos.</p></div>
+ <div class="sa"><svg width="20" height="20"><path d="M4 2 L16 10 L4 18 Z" fill="#8995A5"/></svg></div>
+ <div class="st"><div class="n">ETAPA 3</div><div class="t">Filtrar</div><p>Média móvel suaviza o ruído causado por movimento e suor.</p></div>
+ <div class="sa"><svg width="20" height="20"><path d="M4 2 L16 10 L4 18 Z" fill="#8995A5"/></svg></div>
+ <div class="st"><div class="n">ETAPA 4</div><div class="t">Enriquecer</div><p>Converte x, y, z na zona da mina e liga a leitura ao trabalhador do turno.</p></div>
+ <div class="sa"><svg width="20" height="20"><path d="M4 2 L16 10 L4 18 Z" fill="#8995A5"/></svg></div>
+ <div class="st al"><div class="n">ETAPA 5</div><div class="t">Avaliar regras</div><p>Compara com os limites de segurança e gera alertas na hora.</p></div>
+ <div class="sa"><svg width="20" height="20"><path d="M4 2 L16 10 L4 18 Z" fill="#8995A5"/></svg></div>
+ <div class="st db"><div class="n">ETAPA 6</div><div class="t">Armazenar e resumir</div><p>Grava a leitura e atualiza médias por minuto e por turno.</p></div>
+</div>
+
+<div class="two">
+ <div class="card"><h3>Regras de alerta (valores iniciais, a calibrar no piloto)</h3>
+  <table>
+   <tr><th>Situação</th><th>Quando dispara</th><th>Nível</th></tr>
+   <tr><td>Botão SOS</td><td>Imediatamente</td><td><span class="lv c">Crítico</span></td></tr>
+   <tr><td>Oxigenação baixa</td><td>SpO2 abaixo de 90%</td><td><span class="lv c">Crítico</span></td></tr>
+   <tr><td>Frequência cardíaca</td><td>Abaixo de 40 ou acima de 150 BPM por 30 s</td><td><span class="lv a">Alto</span></td></tr>
+   <tr><td>Perda de sinal</td><td>Sem pacotes por 30 s (6 envios)</td><td><span class="lv a">Alto</span></td></tr>
+   <tr><td>Bateria fraca</td><td>Abaixo de 15%</td><td><span class="lv w">Aviso</span></td></tr>
+  </table></div>
+ <div class="card"><h3>Por quanto tempo cada dado é guardado</h3>
+  <div class="ret">
+   <div class="bar"><div class="lab">Leituras detalhadas<small>uma a cada 5 s</small></div><div class="tr"><div class="fl" style="width:22%;background:#0E7C7B">90 dias</div></div></div>
+   <div class="bar"><div class="lab">Resumos<small>por minuto e por turno</small></div><div class="tr"><div class="fl" style="width:68%;background:#1F3A5F">5 anos</div></div></div>
+   <div class="bar"><div class="lab">Alertas e SOS<small>prova para auditoria</small></div><div class="tr"><div class="fl" style="width:100%;background:#B83227">Permanente</div></div></div>
+  </div>
+  <p style="font-size:13.5px;color:#5b6675;margin-top:16px;line-height:1.45">Dados antigos são compactados automaticamente. Assim o banco não cresce sem limite e o histórico necessário para relatórios NR-22 continua disponível.</p>
+ </div>
+</div>
+
+<div class="sec"><div class="ic"><svg width="24" height="26" viewBox="0 0 24 26"><rect x="3" y="11" width="18" height="13" rx="3" fill="#fff"/><path d="M7 11 V7 a5 5 0 0 1 10 0 V11" fill="none" stroke="#fff" stroke-width="2.6"/></svg></div>
+ <div><h3 style="margin-bottom:8px">Segurança e LGPD</h3>
+ <div class="g">
+  <div><b>Criptografia:</b> AES-128 no rádio LoRaWAN e TLS entre gateway, servidor e dashboard.</div>
+  <div><b>Pseudonimização:</b> as leituras guardam só o ID da braçadeira, não o nome.</div>
+  <div><b>Acesso por perfil:</b> operador vê o mapa ao vivo, segurança vê alertas, gestor vê relatórios.</div>
+  <div><b>Dado sensível:</b> BPM e SpO2 são dados de saúde (LGPD, art. 11) e exigem finalidade clara e registro de acesso.</div>
+ </div></div>
+</div>
+</div>
+</body></html>
